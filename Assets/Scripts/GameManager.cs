@@ -9,26 +9,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int minutesPerTick = 10;
 
     private GameTime gameTime;
-    private TimeSystem timeSystem;
     public UIManager uiManager;
 
     void Start()
     {
         gameTime = new GameTime();
-        timeSystem = new TimeSystem();
-        tickTimer = tickInterval / timeSystem.GameSpeed;
+        tickTimer = tickInterval / gameTime.GameSpeed;
 
-        uiManager.Initialize(timeSystem, gameTime);
+        uiManager.Initialize(gameTime);
     }
 
     void Update()
     {
-        if (timeSystem.IsPaused) return;
+        if (gameTime.IsPaused) return;
         tickTimer -= Time.deltaTime;
         if (tickTimer <= 0f)
         {
             GameTick();
-            tickTimer = tickInterval / timeSystem.GameSpeed;
+            tickTimer = tickInterval / gameTime.GameSpeed;
         }
     }
 

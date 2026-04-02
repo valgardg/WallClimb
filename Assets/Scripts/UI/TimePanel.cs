@@ -8,11 +8,9 @@ public class TimePanel : MonoBehaviour
     public TMP_Text minuteText;
 
     private GameTime gameTime;
-    private TimeSystem timeSystem;
 
-    public void Initialize(TimeSystem timeSystem, GameTime gameTime)
+    public void Initialize(GameTime gameTime)
     {
-        this.timeSystem = timeSystem;
         this.gameTime = gameTime;
         this.gameTime.OnTimeChanged += UpdateTimeDisplay;
         UpdateTimeDisplay();
@@ -30,12 +28,12 @@ public class TimePanel : MonoBehaviour
 
     public void TogglePause()
     {
-        timeSystem.TogglePause();
+        gameTime.TogglePause();
     }
 
     // slider for game speed would call this method
     public void SetGameSpeed(float speed)
     {
-        timeSystem.SetSpeed(speed);
+        gameTime.SetSpeed(speed);
     }
 }
