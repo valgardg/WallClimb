@@ -13,14 +13,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // Initialize game state and systems
         gymState.ResetToDefaults();
         gameTime = new GameTime();
         tickSystem = new TickSystem();
         tickSystem.Initialize(gameTime);
-        tickSystem.OnTick += () => gameTime.AdvanceTime(minutesPerTick);
-        tickSystem.OnTick += customerManager.TrySpawnCustomer;
+        uiManager.Initialize(gameTime, customerManager);
 
-        uiManager.Initialize(gameTime);
+        // Subscribe to tick events
+        tickSystem.OnTick += () => gameTime.AdvanceTime(minutesPerTick);
+        tickSystem.OnTick += () => customerManager.OnTick(gameTime.currentHour);
+        gameTime.OnStartOfDay += () => customerManager.OnStartOfDay();
+
     }
 
     void Update()

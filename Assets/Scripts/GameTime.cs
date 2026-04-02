@@ -10,6 +10,7 @@ public class GameTime
 
     public Action OnTimeChanged;
     public Action OnEndOfDay;
+    public Action OnStartOfDay;
 
     public float GameSpeed { get; private set; } = 1f;
     public bool IsPaused { get; private set; } = false;
@@ -48,5 +49,6 @@ public class GameTime
         currentMinute = 0;
         TogglePause();
         OnTimeChanged?.Invoke();
+        OnStartOfDay?.Invoke();
     }
 }
