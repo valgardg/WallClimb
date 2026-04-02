@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GymState gymState;
     [Header("Tick Settings")]
     private float tickInterval = 1.0f;
     private float tickTimer = 0f;
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        gymState.ResetToDefaults();
         gameTime = new GameTime();
         tickTimer = tickInterval / gameTime.GameSpeed;
 
