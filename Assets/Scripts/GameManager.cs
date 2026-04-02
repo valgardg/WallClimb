@@ -3,37 +3,28 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GymState gymState;
-    [Header("Tick Settings")]
-    private float tickInterval = 1.0f;
-    private float tickTimer = 0f;
 
     [SerializeField] private int minutesPerTick = 10;
 
     private GameTime gameTime;
+    private TickSystem tickSystem;
     public UIManager uiManager;
+    public CustomerManager customerManager;
 
     void Start()
     {
         gymState.ResetToDefaults();
         gameTime = new GameTime();
-        tickTimer = tickInterval / gameTime.GameSpeed;
+        tickSystem = new TickSystem();
+        tickSystem.Initialize(gameTime);
+        tickSystem.OnTick += () => gameTime.AdvanceTime(minutesPerTick);
+        tickSystem.OnTick += customerManager.TrySpawnCustomer;
 
         uiManager.Initialize(gameTime);
     }
 
     void Update()
     {
-        if (gameTime.IsPaused) return;
-        tickTimer -= Time.deltaTime;
-        if (tickTimer <= 0f)
-        {
-            GameTick();
-            tickTimer = tickInterval / gameTime.GameSpeed;
-        }
-    }
-
-    void GameTick()
-    {
-        gameTime.AdvanceTime(minutes: minutesPerTick); 
+        tickSystem.Tick(Time.deltaTime);
     }
 }

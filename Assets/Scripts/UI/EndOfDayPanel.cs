@@ -19,7 +19,7 @@ public class EndOfDayPanel : MonoBehaviour
 
     public void StartNextDay()
     {
-        gameTime.TogglePause();
+        gameTime.StartNextDay();
         panel.SetActive(false);
     }
 }

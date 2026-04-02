@@ -3,9 +3,11 @@ using System;
 
 public class GameTime
 {
+    [Header("Current Time")]
     public int currentDay = 1;
     public int currentHour = 10;
     public int currentMinute = 0;
+
     public Action OnTimeChanged;
     public Action OnEndOfDay;
 
@@ -26,7 +28,6 @@ public class GameTime
             OnEndOfDay?.Invoke();
         }
 
-        Debug.Log($"Day {currentDay}, {currentHour:00}:{currentMinute:00}");
         OnTimeChanged?.Invoke();
     }
 

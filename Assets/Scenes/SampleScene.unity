@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9bb2389d21104e84a7fa28b1b16f1dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  gymState: {fileID: 0}
 --- !u!4 &83658042
 Transform:
   m_ObjectHideFlags: 0
@@ -408,6 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd747089fc37b45248fdf8f2481ec26f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  gymState: {fileID: 11400000, guid: b97e72dc332df4dbf98189a73f3de251, type: 2}
   minutesPerTick: 10
   uiManager: {fileID: 190819941}
 --- !u!4 &177242305
