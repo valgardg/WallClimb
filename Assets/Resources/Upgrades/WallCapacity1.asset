@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11be9d4ab13654b14aa5bb0034ccea30, type: 3}
+  m_Name: WallCapacity1
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeDefintion
+  upgradeName: Wall Capacity
+  description: You buy a second wall for your gym allowing for more customers to
+    climb at a given time!
+  icon: {fileID: 0}
+  baseCost: 400
+  dailyUpkeep: 0
+  effectType: 1
+  effectValue: 1
+  maxLevel: 10
+  costMultiplierPerLevel: 1.5
+  prerequisites: []

@@ -19,7 +19,7 @@ public class GymState : ScriptableObject
 
     public void ResetToDefaults()
     {
-        cash = 500f;
+        // cash = 500f;
         todayEarnings = 0f;
         todayExpenses = 0f;
         wallQuality = 1;
