@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         gameTime = new GameTime();
         tickSystem = new TickSystem();
         tickSystem.Initialize(gameTime);
-        uiManager.Initialize(gameTime, customerManager, upgradeManager);
+        uiManager.Initialize(gameTime, customerManager, upgradeManager, gymState);
 
         // Subscribe to tick events
         tickSystem.OnTick += () => gameTime.AdvanceTime(minutesPerTick);

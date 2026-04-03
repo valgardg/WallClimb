@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
@@ -5,61 +6,56 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private GymState gymState;
     [SerializeField] private UpgradeDefintion[] allUpgrades;
 
-    private System.Collections.Generic.Dictionary<UpgradeDefintion, int> purchasedLevels = new();
+    [SerializeField] private UpgradeDefintion[] purchasedUpgrades;
 
     public bool CanPurchaseUpgrade(UpgradeDefintion upgrade)
     {
-        int currentLevel = GetUpgradeLevel(upgrade);
-        if (currentLevel >= upgrade.maxLevel) return false;
-
+        // Check if already purchased
+        if (System.Array.Exists(purchasedUpgrades, u => u == upgrade)) return false;
         // Check prerequisites
         foreach (var prereq in upgrade.prerequisites)
         {
-            if (GetUpgradeLevel(prereq) < prereq.maxLevel) return false;
+            if (!System.Array.Exists(purchasedUpgrades, u => u == prereq)) return
+                false;
         }
-
-        return gymState.cash >= upgrade.GetCostForLevel(currentLevel);
+        // Check cost
+        return gymState.cash >= upgrade.baseCost;
     }
 
     public void PurchaseUpgrade(UpgradeDefintion upgrade)
     {
         if (!CanPurchaseUpgrade(upgrade)) return;
-
-        int currentLevel = GetUpgradeLevel(upgrade);
-        float cost = upgrade.GetCostForLevel(currentLevel);
-        gymState.cash -= cost;
+        gymState.cash -= upgrade.baseCost;
 
         // Apply upgrade effect
         ApplyUpgradeEffect(upgrade);
-
-        // Increment level
-        purchasedLevels[upgrade] = currentLevel + 1;
+        // Add to purchased upgrades
+        purchasedUpgrades = purchasedUpgrades.Append(upgrade).ToArray();
     }
 
     private void ApplyUpgradeEffect(UpgradeDefintion upgrade)
     {
-        switch (upgrade.effectType)
+        for (int i = 0; i < upgrade.effects.Length; i++)
         {
-            case UpgradeEffect.WallQuality:
-                gymState.wallQuality += (int)upgrade.effectValue;
-                break;
-            case UpgradeEffect.WallCapabity:
-                gymState.wallCapabity += (int)upgrade.effectValue;
-                break;
-            case UpgradeEffect.Reputation:
-                gymState.reputation += upgrade.effectValue;
-                break;
-            case UpgradeEffect.EntryFeeMultiplier:
-                gymState.entryFee *= upgrade.effectValue;
-                break;
-            case UpgradeEffect.PassiveIncome:
-                // Handle passive income logic (e.g., add to daily earnings)
-                break;
+                var effect = upgrade.effects[i];
+                switch (effect.type)
+                {
+                    case UpgradeEffectType.WallQuality:
+                        gymState.wallQuality += (int)effect.value;
+                        break;
+                    case UpgradeEffectType.WallCapabity:
+                        gymState.wallCapabity += (int)effect.value;
+                        break;
+                    case UpgradeEffectType.Reputation:
+                        gymState.reputation += effect.value;
+                        break;
+                    case UpgradeEffectType.EntryFeeMultiplier:
+                        gymState.entryFee *= effect.value;
+                        break;
+                    case UpgradeEffectType.PassiveIncome:
+                        // Handle passive income logic (e.g., add to daily earnings)
+                        break;
+                }
         }
-    }
-
-    private int GetUpgradeLevel(UpgradeDefintion upgrade)
-    {
-        return purchasedLevels.TryGetValue(upgrade, out int level) ? level : 0;
     }
 }

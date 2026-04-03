@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradePanel : MonoBehaviour
 {
@@ -22,5 +23,8 @@ public class UpgradePanel : MonoBehaviour
             prefabInstance.Initialize(upgrade);
             prefabInstance.OnUpgradeClicked += upgradeManager.PurchaseUpgrade;
         }
+        // Resolve all layouts after population is complete
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(upgradeListContainer.GetComponent<RectTransform>());
     }
 }

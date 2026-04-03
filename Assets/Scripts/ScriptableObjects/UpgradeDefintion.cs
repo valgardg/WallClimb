@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum UpgradeEffect
+public enum UpgradeEffectType
 {
     WallQuality,
     WallCapabity,
@@ -8,6 +8,13 @@ public enum UpgradeEffect
     EntryFeeMultiplier,
     PassiveIncome
 
+}
+
+[System.Serializable]
+public struct UpgradeEffect
+{
+    public UpgradeEffectType type;
+    public float value;
 }
 
 [CreateAssetMenu(fileName = "UpgradeDefintion", menuName = "Scriptable Objects/UpgradeDefintion")]
@@ -22,16 +29,8 @@ public class UpgradeDefintion : ScriptableObject
     public float dailyUpkeep = 0f;
 
     [Header("Effect")]
-    public UpgradeEffect effectType;
-    public float effectValue;
+    public UpgradeEffect[] effects;
 
     [Header("Progression")]
-    public int maxLevel = 1;
-    public float costMultiplierPerLevel = 1.5f;
     public UpgradeDefintion[] prerequisites;
-
-    public float GetCostForLevel(int level)
-    {
-        return baseCost * Mathf.Pow(costMultiplierPerLevel, level);
-    }
 }
