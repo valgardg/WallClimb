@@ -227,7 +227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9bb2389d21104e84a7fa28b1b16f1dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  gymState: {fileID: 11400000, guid: b97e72dc332df4dbf98189a73f3de251, type: 2}
   customerTypes:
   - {fileID: 11400000, guid: d858363966c434f138d31f2b0b139112, type: 2}
   baseSpawnChance: 0.3
@@ -620,6 +619,7 @@ MonoBehaviour:
   uiManager: {fileID: 190819941}
   customerManager: {fileID: 83658041}
   upgradeManager: {fileID: 1296599021}
+  economyManager: {fileID: 749951549}
 --- !u!4 &177242305
 Transform:
   m_ObjectHideFlags: 0
@@ -2006,6 +2006,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 687005973}
   m_CullTransparentMesh: 1
+--- !u!1 &749951548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 749951550}
+  - component: {fileID: 749951549}
+  m_Layer: 0
+  m_Name: EconomyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &749951549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749951548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2cd92d2fa83a48c8a70e932b0441b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!4 &749951550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749951548}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &789604181
 GameObject:
   m_ObjectHideFlags: 0
@@ -3435,7 +3479,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147cbdc8fa34943d7bd663e2c399d3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  gymState: {fileID: 11400000, guid: b97e72dc332df4dbf98189a73f3de251, type: 2}
   allUpgrades: []
   purchasedUpgrades: []
 --- !u!4 &1296599022
@@ -4148,3 +4191,4 @@ SceneRoots:
   - {fileID: 67293730}
   - {fileID: 83658042}
   - {fileID: 1296599022}
+  - {fileID: 749951550}

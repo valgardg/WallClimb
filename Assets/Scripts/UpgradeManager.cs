@@ -3,10 +3,17 @@ using UnityEngine;
 
 public class UpgradeManager : MonoBehaviour
 {
-    [SerializeField] private GymState gymState;
+    private GymState gymState;
+    private EconomyManager economyManager;
     [SerializeField] private UpgradeDefintion[] allUpgrades;
 
     [SerializeField] private UpgradeDefintion[] purchasedUpgrades;
+
+    public void Initialize(GymState gymState, EconomyManager economyManager)
+    {
+        this.gymState = gymState;
+        this.economyManager = economyManager;
+    }
 
     public bool CanPurchaseUpgrade(UpgradeDefintion upgrade)
     {

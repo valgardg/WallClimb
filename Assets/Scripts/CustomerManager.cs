@@ -22,7 +22,7 @@ public class Customer {
 
 public class CustomerManager : MonoBehaviour
 {
-    [SerializeField] private GymState gymState;
+    private GymState gymState;
     [SerializeField] private CustomerType[] customerTypes;
 
     [Header("Spawning Tuning")]
@@ -34,6 +34,13 @@ public class CustomerManager : MonoBehaviour
     public IReadOnlyList<Customer> Customers => customers;
     public int ClimbingCount { get; private set; }
     public int DayCustomerCount { get; private set; }
+
+    public void Initialize(GymState gymState, GameTime gameTime, TickSystem tickSystem)
+    {
+        this.gymState = gymState;
+        gameTime.OnStartOfDay += () => OnStartOfDay();
+        tickSystem.OnTick += () => OnTick(gameTime.currentHour);
+    }
 
     public void OnTick(int currentHour)
     {
@@ -142,7 +149,7 @@ public class CustomerManager : MonoBehaviour
         }
     }
 
-    public void OnStartOfDay()
+    private void OnStartOfDay()
     {
         DayCustomerCount = 0;   
     }
