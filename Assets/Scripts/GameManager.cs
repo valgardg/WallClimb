@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public CustomerManager customerManager;
     public UpgradeManager upgradeManager;
     public EconomyManager economyManager;
+    public GymManager GymManager;
 
     void Start()
     {
@@ -22,15 +23,17 @@ public class GameManager : MonoBehaviour
         tickSystem.Initialize(gameTime);
 
         // Initialize managers with dependencies
+        economyManager.Initialize(gymState, gameTime);
         customerManager.Initialize(gymState, gameTime, tickSystem);
-        economyManager.Initialize(gymState);
         upgradeManager.Initialize(gymState, economyManager);
+        GymManager.Initialize(gymState, gameTime, economyManager, upgradeManager);
 
-        // Subscribe to tick events
+        // Subscribe to events
         tickSystem.OnTick += () => gameTime.AdvanceTime(minutesPerTick);
+        customerManager.OnCustomerPayment += (amount) => economyManager.AddMoney(amount);
 
         // Finally initialize UI
-        uiManager.Initialize(gameTime, customerManager, upgradeManager, gymState);
+        uiManager.Initialize(gameTime, customerManager, upgradeManager, gymState, economyManager);
     }
 
     void Update()

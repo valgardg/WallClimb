@@ -7,6 +7,8 @@ public class GymState : ScriptableObject
     public float cash = 500f;
     public float todayEarnings = 0f;
     public float todayExpenses = 0f;
+    public float rent = 100f;
+    public float totalDailyUpkeep = 0f;
 
     [Header("Gym Stats")]
     public int wallQuality = 1;
@@ -22,6 +24,8 @@ public class GymState : ScriptableObject
         // cash = 500f;
         todayEarnings = 0f;
         todayExpenses = 0f;
+        rent = 100f;
+        totalDailyUpkeep = 0f;
         wallQuality = 1;
         wallCapabity = 1;
         reputation = 1.0f;

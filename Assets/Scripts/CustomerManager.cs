@@ -35,6 +35,9 @@ public class CustomerManager : MonoBehaviour
     public int ClimbingCount { get; private set; }
     public int DayCustomerCount { get; private set; }
 
+    // Actions
+    public event System.Action<float> OnCustomerPayment;
+
     public void Initialize(GymState gymState, GameTime gameTime, TickSystem tickSystem)
     {
         this.gymState = gymState;
@@ -63,6 +66,9 @@ public class CustomerManager : MonoBehaviour
         customers.Add(customer);
         gymState.currentCustomers++;
         DayCustomerCount++;
+
+        OnCustomerPayment?.Invoke(gymState.entryFee);
+
         Debug.Log($"A new customer has entered the gym. Total customers: {gymState.currentCustomers}");
     }
 

@@ -17,7 +17,7 @@ MonoBehaviour:
     from the church of advanced dynology..
   icon: {fileID: 0}
   baseCost: 800
-  dailyUpkeep: 0
+  dailyUpkeep: 5
   effects:
   - type: 1
     value: 2

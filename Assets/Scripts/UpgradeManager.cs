@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -9,60 +10,36 @@ public class UpgradeManager : MonoBehaviour
 
     [SerializeField] private UpgradeDefintion[] purchasedUpgrades;
 
+    public Action<UpgradeDefintion> OnUpgradePurchased;
+
     public void Initialize(GymState gymState, EconomyManager economyManager)
     {
         this.gymState = gymState;
         this.economyManager = economyManager;
     }
 
-    public bool CanPurchaseUpgrade(UpgradeDefintion upgrade)
+    public bool CanApplyUpgrade(UpgradeDefintion upgrade)
     {
         // Check if already purchased
         if (System.Array.Exists(purchasedUpgrades, u => u == upgrade)) return false;
         // Check prerequisites
         foreach (var prereq in upgrade.prerequisites)
         {
-            if (!System.Array.Exists(purchasedUpgrades, u => u == prereq)) return
+            if (!Array.Exists(purchasedUpgrades, u => u == prereq)) return
                 false;
         }
-        // Check cost
-        return gymState.cash >= upgrade.baseCost;
+        return true;
     }
 
     public void PurchaseUpgrade(UpgradeDefintion upgrade)
     {
-        if (!CanPurchaseUpgrade(upgrade)) return;
-        gymState.cash -= upgrade.baseCost;
-
-        // Apply upgrade effect
-        ApplyUpgradeEffect(upgrade);
+        if (!CanApplyUpgrade(upgrade)) return;
+        
+        // try to spend money
+        if (!economyManager.TrySpendMoney(upgrade.baseCost)) return;
+        // Announce purchase
+        OnUpgradePurchased?.Invoke(upgrade);
         // Add to purchased upgrades
         purchasedUpgrades = purchasedUpgrades.Append(upgrade).ToArray();
-    }
-
-    private void ApplyUpgradeEffect(UpgradeDefintion upgrade)
-    {
-        for (int i = 0; i < upgrade.effects.Length; i++)
-        {
-                var effect = upgrade.effects[i];
-                switch (effect.type)
-                {
-                    case UpgradeEffectType.WallQuality:
-                        gymState.wallQuality += (int)effect.value;
-                        break;
-                    case UpgradeEffectType.WallCapabity:
-                        gymState.wallCapabity += (int)effect.value;
-                        break;
-                    case UpgradeEffectType.Reputation:
-                        gymState.reputation += effect.value;
-                        break;
-                    case UpgradeEffectType.EntryFeeMultiplier:
-                        gymState.entryFee *= effect.value;
-                        break;
-                    case UpgradeEffectType.PassiveIncome:
-                        // Handle passive income logic (e.g., add to daily earnings)
-                        break;
-                }
-        }
     }
 }

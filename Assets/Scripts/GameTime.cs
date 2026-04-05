@@ -11,6 +11,7 @@ public class GameTime
     public Action OnTimeChanged;
     public Action OnEndOfDay;
     public Action OnStartOfDay;
+    public Action OnEndOfWeek;
 
     public float GameSpeed { get; private set; } = 1f;
     public bool IsPaused { get; private set; } = false;
@@ -23,11 +24,20 @@ public class GameTime
             currentMinute = 0;
             currentHour++;
         }
-        if (currentHour >= 22)
+         // invoke end of week
+        if (currentDay % 7 == 0 && currentHour >= 22)
+        {
+            // Handle end of week logic here (e.g., reset weekly stats, trigger events)
+            TogglePause();
+            OnEndOfWeek?.Invoke();
+            OnEndOfDay?.Invoke();
+        }
+        else if (currentHour >= 22)
         {
             TogglePause();
             OnEndOfDay?.Invoke();
         }
+       
 
         OnTimeChanged?.Invoke();
     }

@@ -9,10 +9,12 @@ public class UIManager : MonoBehaviour
     public UpgradePanel upgradePanel;
     public GymStatsPanel gymStatsPanel;
 
-    public void Initialize(GameTime gameTime, CustomerManager customerManager, UpgradeManager upgradeManager, GymState gymState)
+    public void Initialize(GameTime gameTime, CustomerManager customerManager, 
+                           UpgradeManager upgradeManager, GymState gymState, 
+                           EconomyManager economyManager)
     {
         timePanel.Initialize(gameTime);
-        endOfDayPanel.Initialize(gameTime, customerManager);
+        endOfDayPanel.Initialize(gameTime, customerManager, economyManager);
         upgradePanel.Initialize(upgradeManager);
         customersPanel.Initialize(customerManager);
         gymStatsPanel.Initialize(gymState);

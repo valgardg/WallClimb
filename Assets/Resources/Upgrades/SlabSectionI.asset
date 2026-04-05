@@ -17,7 +17,7 @@ MonoBehaviour:
     their slab climbing!
   icon: {fileID: 0}
   baseCost: 400
-  dailyUpkeep: 0
+  dailyUpkeep: 5
   effects:
   - type: 1
     value: 2

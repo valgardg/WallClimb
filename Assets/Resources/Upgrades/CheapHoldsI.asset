@@ -17,7 +17,7 @@ MonoBehaviour:
     the current homemade ones!
   icon: {fileID: 0}
   baseCost: 200
-  dailyUpkeep: 0
+  dailyUpkeep: 5
   effects:
   - type: 0
     value: 1

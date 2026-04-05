@@ -8,9 +8,11 @@ public class UpgradePrefab : MonoBehaviour
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private Transform effectList;
     [SerializeField] private TMP_Text effectTextPrefab;
+    [SerializeField] private TMP_Text dailyCostText;
     [SerializeField] private TMP_Text costText;
 
     private UpgradeDefintion upgrade;
+    public UpgradeDefintion UpgradeData => upgrade;
     public Action<UpgradeDefintion> OnUpgradeClicked;
 
     public void Initialize(UpgradeDefintion upgrade)
@@ -25,6 +27,7 @@ public class UpgradePrefab : MonoBehaviour
             var effectText = Instantiate(effectTextPrefab, effectList);
             effectText.text = $"{effect.type}: +{effect.value}";
         }
+        dailyCostText.text = $"Daily Cost: ${upgrade.dailyUpkeep}";
         costText.text = $"${upgrade.baseCost}";
     }
 
