@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11be9d4ab13654b14aa5bb0034ccea30, type: 3}
-  m_Name: CheapHoldsI
+  m_Name: MarketingII
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDefintion
-  upgradeName: Cheap holds
-  description: You buy a set of new holds. They're cheap, but definitely better than
-    the current homemade ones!
+  upgradeName: Influencer Sponsor
+  description: You send out a small IG ad campaign in the hopes of boosting your
+    gyms marketing
   icon: {fileID: 0}
-  baseCost: 200
-  dailyUpkeep: 10
+  baseCost: 300
+  dailyUpkeep: 0
   effects:
-  - type: 0
-    value: 1
   - type: 2
-    value: 0.2
-  prerequisites: []
+    value: 0.6
+  prerequisites:
+  - {fileID: 11400000, guid: 8ba43b63378754c848d802cc78248bcf, type: 2}

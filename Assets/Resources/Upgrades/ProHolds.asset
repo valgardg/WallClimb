@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11be9d4ab13654b14aa5bb0034ccea30, type: 3}
-  m_Name: CheapHoldsI
+  m_Name: ProHolds
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDefintion
-  upgradeName: Cheap holds
-  description: You buy a set of new holds. They're cheap, but definitely better than
-    the current homemade ones!
+  upgradeName: Pro Holds
+  description: The gym gets upgraded to the best of the best holds used by pros!
+    Customer's hands are going to love these!
   icon: {fileID: 0}
-  baseCost: 200
-  dailyUpkeep: 10
+  baseCost: 1500
+  dailyUpkeep: 20
   effects:
-  - type: 0
-    value: 1
   - type: 2
-    value: 0.2
-  prerequisites: []
+    value: 0.5
+  - type: 0
+    value: 2
+  prerequisites:
+  - {fileID: 11400000, guid: a5b5abd2a742c4cbba358dffe78f2896, type: 2}

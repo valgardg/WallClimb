@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11be9d4ab13654b14aa5bb0034ccea30, type: 3}
-  m_Name: CaveSectionI
+  m_Name: BelaySectionI
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDefintion
-  upgradeName: Cave Section
-  description: Your gym gets a new cave section. You might start receiving visits
-    from the church of advanced dynology..
+  upgradeName: Belay Section
+  description: Add a belay section to the gym allowing customers to belay climb!
   icon: {fileID: 0}
-  baseCost: 1000
-  dailyUpkeep: 25
+  baseCost: 2000
+  dailyUpkeep: 100
   effects:
   - type: 1
-    value: 1
+    value: 2
   - type: 2
-    value: 0.5
+    value: 1.5
   prerequisites:
-  - {fileID: 11400000, guid: a63d9ff532ae14471bc9fce2ac45b11f, type: 2}
+  - {fileID: 11400000, guid: d4e0fed1eb5a0465f941af023037403d, type: 2}
   - {fileID: 11400000, guid: c2c8cf41b1b4e4814ab25fe957750323, type: 2}
+  - {fileID: 11400000, guid: a63d9ff532ae14471bc9fce2ac45b11f, type: 2}
+  - {fileID: 11400000, guid: a5b5abd2a742c4cbba358dffe78f2896, type: 2}

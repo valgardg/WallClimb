@@ -17,6 +17,11 @@ public class GymManager : MonoBehaviour
     {
         float totalDayExpenses = gymState.totalDailyUpkeep;
         economyManager.ForceSpendMoney(totalDayExpenses);
+        float passiveIncome = gymState.passiveIncome;
+        if (passiveIncome > 0)
+        {
+            economyManager.AddMoney(passiveIncome);
+        }
     }
 
     private void HandleWeekEnd()
@@ -45,7 +50,7 @@ public class GymManager : MonoBehaviour
                         gymState.entryFee *= effect.value;
                         break;
                     case UpgradeEffectType.PassiveIncome:
-                        // Handle passive income logic (e.g., add to daily earnings)
+                        gymState.passiveIncome += effect.value;
                         break;
                 }
         }

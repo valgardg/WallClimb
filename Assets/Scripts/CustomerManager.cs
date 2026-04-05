@@ -74,14 +74,18 @@ public class CustomerManager : MonoBehaviour
 
     private float CalculateSpawnChance(int currentHour)
     {
-        // base chance scaled by reputation
-        float repMultiplier = 0.5f + (gymState.reputation * 0.5f);
+        // Reputation now scales [1.0 → 4.0] with steeper curve for high rep
+        float repMultiplier = 1f + 3f * Mathf.Pow((gymState.reputation - 1f) / 9f, 0.7f);
 
         float timeMultiplier = Mathf.Clamp01(
             0.3f + 0.7f * Mathf.Sin(Mathf.PI * (currentHour - 6f) / 16f)
         );
 
-        return baseSpawnChance * repMultiplier * timeMultiplier;
+        // Capacity now clamped to [1.0 → 2.0] — supportive, not dominant
+        float normalizedCapacity = Mathf.Clamp01(gymState.wallCapabity / 10f);
+        float capacityMultiplier = 1f + normalizedCapacity;
+
+        return baseSpawnChance * repMultiplier * timeMultiplier * capacityMultiplier;
     }
 
     private CustomerType PickRandomEligibleCustomerType()
@@ -132,11 +136,11 @@ public class CustomerManager : MonoBehaviour
                     if (customer.TicksRemaining <= 0)
                     {
                         customer.State = CustomerState.Leaving;
+                        gymState.currentCustomers--;
                     }
                     break;
                 case CustomerState.Leaving:
                     customers.RemoveAt(i);
-                    gymState.currentCustomers--;
                     Debug.Log($"A customer has left the gym. Total customers: {gymState.currentCustomers}");
                     break;
             }

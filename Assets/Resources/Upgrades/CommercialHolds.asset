@@ -10,17 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11be9d4ab13654b14aa5bb0034ccea30, type: 3}
-  m_Name: CheapHoldsI
+  m_Name: CommercialHolds
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeDefintion
-  upgradeName: Cheap holds
-  description: You buy a set of new holds. They're cheap, but definitely better than
-    the current homemade ones!
+  upgradeName: Commercial Holds
+  description: The gym now uses proper commercial grade holds from a proper holds
+    manufacturer! Customers will appreciate some actual holds finally!
   icon: {fileID: 0}
-  baseCost: 200
-  dailyUpkeep: 10
+  baseCost: 1000
+  dailyUpkeep: 30
   effects:
   - type: 0
     value: 1
   - type: 2
-    value: 0.2
-  prerequisites: []
+    value: 0.8
+  prerequisites:
+  - {fileID: 11400000, guid: 3dab37ff438ab4066be13275213c2c9e, type: 2}

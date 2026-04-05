@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         // Subscribe to events
         tickSystem.OnTick += () => gameTime.AdvanceTime(minutesPerTick);
         customerManager.OnCustomerPayment += (amount) => economyManager.AddMoney(amount);
+        economyManager.OnBankruptcy += () => GameOver();
 
         // Finally initialize UI
         uiManager.Initialize(gameTime, customerManager, upgradeManager, gymState, economyManager);
@@ -39,5 +40,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         tickSystem.Tick(Time.deltaTime);
+    }
+
+    void GameOver()
+    {
+        gameTime.TogglePause();
     }
 }

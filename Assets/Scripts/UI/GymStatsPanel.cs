@@ -25,7 +25,7 @@ public class GymStatsPanel : MonoBehaviour
             gymCashText.text = $"Cash: ${gymState.cash:F2}";
             wallQualityText.text = $"WQ: {gymState.wallQuality}";
             wallCapacityText.text = $"WC: {gymState.wallCapabity}";
-            reputationText.text = $"RP: {gymState.reputation}";
+            reputationText.text = $"RP: {gymState.reputation}/10";
             entryFeeText.text = $"EF: ${gymState.entryFee:F2}";
         }
     }

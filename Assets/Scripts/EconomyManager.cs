@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EconomyManager : MonoBehaviour
@@ -6,6 +7,10 @@ public class EconomyManager : MonoBehaviour
     private float totalEarnedToday = 0f;
     private float totalSpentToday = 0f;
 
+    [Header("Bankcruptcy Stats")]
+    [SerializeField] private bool wasNegativeAtEndOfDay = false;
+    public event Action OnBankruptcy;
+
     public float TotalEarnedToday => totalEarnedToday;
     public float TotalSpentToday => totalSpentToday;
 
@@ -13,6 +18,7 @@ public class EconomyManager : MonoBehaviour
     {
         this.gymState = gymState;
         gameTime.OnStartOfDay += StartOfDayReset;
+        gameTime.OnEndOfDay += EndOfDayCheck;
     }
 
     public void AddMoney(float amount)
@@ -37,6 +43,21 @@ public class EconomyManager : MonoBehaviour
         totalSpentToday += amount;
         Debug.Log($"Force spent ${amount}. New balance: ${gymState.cash}");
         return true;
+    }
+
+    private void EndOfDayCheck()
+    {
+        if (gymState.cash > 0) return;
+        if (wasNegativeAtEndOfDay)
+        {
+            Debug.Log("Bankruptcy confirmed. Game Over.");
+            OnBankruptcy?.Invoke();
+        }
+        else
+        {
+            Debug.LogWarning("Cash is negative at end of day. If this happens again, the game will end.");
+            wasNegativeAtEndOfDay = true;
+        }
     }
 
     private void StartOfDayReset()

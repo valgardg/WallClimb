@@ -10,15 +10,15 @@ public class UpgradePanel : MonoBehaviour
     public void Initialize(UpgradeManager upgradeManager)
     {
         this.upgradeManager = upgradeManager;
-        upgradeManager.OnUpgradePurchased += upgrade => RemoveUpgradePrefab(upgrade);
+        upgradeManager.OnUpgradePurchased += upgrade => RefreshUpgradeList();
         LoadUpgrades();
     }
 
     private void LoadUpgrades()
     {
-        UpgradeDefintion[] allUpgrades = Resources.LoadAll<UpgradeDefintion>("Upgrades");
-        Debug.Log($"Loaded {allUpgrades.Length} upgrades from Resources/Upgrades");
-        foreach (var upgrade in allUpgrades)
+        UpgradeDefintion[] availableUpgrades = upgradeManager.AvailableUpgrades;
+        Debug.Log($"Loaded {availableUpgrades.Length} upgrades from Resources/Upgrades");
+        foreach (var upgrade in availableUpgrades)
         {
             UpgradePrefab prefabInstance = Instantiate(upgradePrefab, upgradeListContainer);
             prefabInstance.Initialize(upgrade);
@@ -43,5 +43,16 @@ public class UpgradePanel : MonoBehaviour
         // Resolve all layouts after removal
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(upgradeListContainer.GetComponent<RectTransform>());
+    }
+
+    private void RefreshUpgradeList()
+    {
+        // Clear existing prefabs
+        foreach (Transform child in upgradeListContainer)
+        {
+            Destroy(child.gameObject);
+        }
+        // Reload upgrades
+        LoadUpgrades();
     }
 }

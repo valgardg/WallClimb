@@ -16,11 +16,11 @@ MonoBehaviour:
   description: You add a slab wall to your climbing gym allowing climbers to practice
     their slab climbing!
   icon: {fileID: 0}
-  baseCost: 400
-  dailyUpkeep: 5
+  baseCost: 500
+  dailyUpkeep: 25
   effects:
   - type: 1
-    value: 2
-  - type: 0
     value: 1
+  - type: 2
+    value: 0.25
   prerequisites: []
