@@ -74,7 +74,7 @@ public class CustomerManager : MonoBehaviour
         gymState.currentCustomers++;
         DayCustomerCount++;
 
-        OnCustomerPayment?.Invoke(gymState.entryFee);
+        OnCustomerPayment?.Invoke(gymState.entryFee * type.payMultiplier);
 
         Debug.Log($"A new customer {type.name} has entered the gym. Total customers: {gymState.currentCustomers}");
     }
