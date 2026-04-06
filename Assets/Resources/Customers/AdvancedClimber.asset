@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8693601bb0b6341eab65a3d70c367af9, type: 3}
-  m_Name: GeneralCustomer
+  m_Name: AdvancedClimber
   m_EditorClassIdentifier: Assembly-CSharp::CustomerType
-  typeName: Beginner Climber
-  climbDurationTicks: 6
-  payMultiplier: 1
-  spawnWeight: 1
-  minWallQuality: 0
-  minReputation: 0
+  typeName: Advanced Climber
+  climbDurationTicks: 7
+  payMultiplier: 1.5
+  spawnWeight: 0.5
+  minWallQuality: 3
+  minReputation: 4

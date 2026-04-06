@@ -69,7 +69,7 @@ public class CustomerManager : MonoBehaviour
 
         OnCustomerPayment?.Invoke(gymState.entryFee);
 
-        Debug.Log($"A new customer has entered the gym. Total customers: {gymState.currentCustomers}");
+        Debug.Log($"A new customer {type.name} has entered the gym. Total customers: {gymState.currentCustomers}");
     }
 
     private float CalculateSpawnChance(int currentHour)
