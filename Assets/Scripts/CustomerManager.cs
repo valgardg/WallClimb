@@ -43,6 +43,7 @@ public class CustomerManager : MonoBehaviour
         this.gymState = gymState;
         gameTime.OnStartOfDay += () => OnStartOfDay();
         tickSystem.OnTick += () => OnTick(gameTime.currentHour);
+        LoadCustomerTypes();
     }
 
     public void OnTick(int currentHour)
@@ -50,6 +51,12 @@ public class CustomerManager : MonoBehaviour
         TickClimbingCustomers();
         TrySpawnCustomer(currentHour);
         UpdateCounts();
+    }
+
+    private void LoadCustomerTypes()
+    {
+        customerTypes = Resources.LoadAll<CustomerType>("CustomerTypes");
+        Debug.Log($"Loaded {customerTypes.Length} customer types.");
     }
 
     private void TrySpawnCustomer(int currentHour)
