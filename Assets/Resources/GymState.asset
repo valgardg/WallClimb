@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b41f7343c16e492986a59b5d1ead980, type: 3}
   m_Name: GymState
   m_EditorClassIdentifier: Assembly-CSharp::GymState
-  cash: 603870
+  cash: 590565
   todayEarnings: 0
   todayExpenses: 0
   rent: 100
